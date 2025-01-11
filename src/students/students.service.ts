@@ -35,6 +35,11 @@ export class StudentsService {
         return this.studentRepository.save(student);
     }
 
-
+    async deleteStudent(id: number): Promise<void> {
+        const result = await this.studentRepository.delete(id);
+        if(result.affected === 0) {
+            throw new NotFoundException('Student with ID $(id) not found');
+        }
+    }
 
 }
